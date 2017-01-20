@@ -1,6 +1,7 @@
 (ns todolist.routes.home
   (:require [todolist.layout :as layout]
-            [compojure.core :refer [defroutes GET]]
+            [todolist.db.core :as db]
+            [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :as response]
             [clojure.java.io :as io]))
 
@@ -11,7 +12,12 @@
 (defn about-page []
   (layout/render "about.html"))
 
+(defn create-task [{:keys [params]}]
+  (db/create-task! params)
+  (response/found "/"))
+
 (defroutes home-routes
   (GET "/" [] (home-page))
+  (POST "/" request (create-task request))
   (GET "/about" [] (about-page)))
 
