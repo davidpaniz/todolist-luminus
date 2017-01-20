@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
+
+<div class="row">
+  <div class="span12">
+    <ul class="messages">
+      {% for task in tasks %}
+      <li>
+        <span>{{task.title}} - Priority: {{task.priority}} - Size: {{task.size}}</span>
+        <p>{{task.description}}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <h3>TOAL: {{total}}</h3>
+  </div>
+</div>
+
+
 <div class="row">
   <div class="span12">
     <form method="POST" action="/">
