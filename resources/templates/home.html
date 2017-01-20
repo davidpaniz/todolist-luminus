@@ -8,6 +8,16 @@
       <li>
         <span>{{task.title}} - Priority: {{task.priority}} - Size: {{task.size}}</span>
         <p>{{task.description}}</p>
+        {% if not task.done %}
+        <form method="POST" action="/{{task.id}}">
+          {% csrf-field %}
+          <input class="form-control"
+                 type="hidden"
+                 name="id"
+                 value="{{task.id}}"/>
+          <input type="submit" class="btn" value="Finish!"/>
+        </form>
+        {% endif %}
       </li>
       {% endfor %}
     </ul>
@@ -25,7 +35,7 @@
         <input class="form-control"
                type="text"
                name="title"
-               value="{{title}}" />
+               value="{{title}}"/>
       </p>
       <p>
         Description:
@@ -39,16 +49,16 @@
         <input class="form-control"
                type="number"
                name="priority"
-               value="{{priority}}" />
+               value="{{priority}}"/>
       </p>
       <p>
         Size:
         <input class="form-control"
                type="number"
                name="size"
-               value="{{size}}" />
+               value="{{size}}"/>
       </p>
-      <input type="submit" class="btn btn-primary" value="comment" />
+      <input type="submit" class="btn btn-primary" value="comment"/>
     </form>
   </div>
 </div>

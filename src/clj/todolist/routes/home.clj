@@ -16,8 +16,13 @@
   (db/create-task! params)
   (response/found "/"))
 
+(defn finish-task [id]
+  (db/finish-task! {:id id})
+  (response/found "/"))
+
 (defroutes home-routes
   (GET "/" [] (home-page))
   (POST "/" request (create-task request))
+  (POST "/:id" [id] (finish-task id))
   (GET "/about" [] (about-page)))
 
