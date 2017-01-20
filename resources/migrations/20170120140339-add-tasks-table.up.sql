@@ -1,0 +1,7 @@
+CREATE TABLE tasks
+(id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ title VARCHAR(30),
+ description VARCHAR(30),
+ done BOOLEAN,
+ priority INTEGER,
+ size INTEGER );
