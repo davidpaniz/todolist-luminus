@@ -5,14 +5,14 @@
             [ring.util.http-response :as response]
             [clojure.java.io :as io]))
 
+(defn sum-size [total el]
+  (+ total (get el :size 0)))
+
 (defn home-page []
   (let [tasks (->> (db/all-tasks)
-                   (filter (fn [task]
-                             (not (:done task))))
-                   (sort (fn [task-a task-b]
-                           (< (:priority task-a) (:priority task-b)))))
-        total (reduce (fn [total el]
-                        (+ total (get el :size 0))) 0 tasks)]
+                   (filter #(not (:done %)))
+                   (sort-by :priority))
+        total (reduce sum-size 0 tasks)]
 
     (layout/render "home.html" {:tasks tasks
                                 :total total})))
