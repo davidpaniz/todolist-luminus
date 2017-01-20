@@ -6,7 +6,11 @@
             [clojure.java.io :as io]))
 
 (defn home-page []
-  (let [tasks (filter (fn [task] (not (:done task))) (db/all-tasks))]
+  (let [tasks (sort (fn [task-a task-b]
+                      (< (:priority task-a) (:priority task-b)))
+                    (filter (fn [task]
+                              (not (:done task)))
+                            (db/all-tasks)))]
     (layout/render "home.html" {:tasks tasks})))
 
 (defn about-page []
