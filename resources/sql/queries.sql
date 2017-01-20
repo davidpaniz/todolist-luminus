@@ -1,21 +1,31 @@
--- :name create-user! :! :n
--- :doc creates a new user record
-INSERT INTO users
-(id, first_name, last_name, email, pass)
-VALUES (:id, :first_name, :last_name, :email, :pass)
+-- :name create-task! :! :n
+-- :doc creates a new task record
+INSERT INTO tasks
+(title, description, priority, size, done)
+VALUES (:title, :description, :priority, :size, FALSE)
 
--- :name update-user! :! :n
--- :doc update an existing user record
-UPDATE users
-SET first_name = :first_name, last_name = :last_name, email = :email
+-- :name update-task! :! :n
+-- :doc update an existing task record
+UPDATE tasks
+SET title = :title, title = :title, description = :description, priority = :priority, size = :size
 WHERE id = :id
 
--- :name get-user :? :1
--- :doc retrieve a user given the id.
-SELECT * FROM users
+-- :name get-task :? :1
+-- :doc retrieve a task given the id.
+SELECT * FROM tasks
 WHERE id = :id
 
--- :name delete-user! :! :n
--- :doc delete a user given the id
-DELETE FROM users
+-- :name all-tasks :? :*
+-- :doc retrieve a task given the id.
+SELECT * FROM tasks
+
+-- :name finish-task! :! :n
+-- :doc update a task done flag given the id.
+UPDATE tasks
+SET done = true
+WHERE id = :id
+
+-- :name delete-task! :! :n
+-- :doc delete a task given the id
+DELETE FROM tasks
 WHERE id = :id
