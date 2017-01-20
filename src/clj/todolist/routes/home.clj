@@ -6,8 +6,8 @@
             [clojure.java.io :as io]))
 
 (defn home-page []
-  (layout/render
-    "home.html" {:tasks (db/all-tasks)}))
+  (let [tasks (db/all-tasks)]
+    (layout/render "home.html" {:tasks tasks})))
 
 (defn about-page []
   (layout/render "about.html"))
