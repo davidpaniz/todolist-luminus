@@ -1,8 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-  <div class="col-sm-12">
-    {{docs|markdown}}
+  <div class="span12">
+    <form method="POST" action="/">
+      {% csrf-field %}
+      <p>
+        Title:
+        <input class="form-control"
+               type="text"
+               name="title"
+               value="{{title}}" />
+      </p>
+      <p>
+        Description:
+        <textarea class="form-control"
+                  rows="4"
+                  cols="50"
+                  name="description">{{description}}</textarea>
+      </p>
+      <p>
+        Priority:
+        <input class="form-control"
+               type="number"
+               name="priority"
+               value="{{priority}}" />
+      </p>
+      <p>
+        Size:
+        <input class="form-control"
+               type="number"
+               name="size"
+               value="{{size}}" />
+      </p>
+      <input type="submit" class="btn btn-primary" value="comment" />
+    </form>
   </div>
 </div>
 {% endblock %}
